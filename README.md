@@ -1,5 +1,6 @@
 # AI-Vs-AI
-![7](https://github.com/user-attachments/assets/c80a2815-6963-4d5b-a341-60b57c6a0fa9)
+![8](https://github.com/user-attachments/assets/66f3bfae-85b1-4081-8f98-0cbeb052fcb1)
+
 
 # Project Idea
 In recent years, AI-generated content has proliferated, raising significant concerns about the authenticity of online visual media. Models like Generative Adversarial Networks (GANs) and Diffusion models can generate highly realistic images that are often indistinguishable from real ones. This evolution introduces a critical challenge: **Can AI overcome itself?**
@@ -117,6 +118,16 @@ The following table summarizes the performance of our model on various datasets:
 The following table compares the performance of our model with other models across different datasets. In the Artifact dataset, a CNN model achieved an accuracy of 87%. Our approach, evaluated on the Artifact dataset, utilized a Capsule model and achieved an accuracy of 86.24%. Transitioning to the Faces dataset, a Capsule model achieved a higher accuracy of 92%. On the Faces dataset, our Capsule model demonstrated improved performance with an accuracy of 93.5%. These results illustrate the comparative effectiveness of different models in detecting AI-generated content across specific datasets, highlighting the strengths of Capsule models, particularly in the context of face image detection.
 
 ![6](https://github.com/user-attachments/assets/c18a63cf-6152-4e8b-a4a2-dfb232f7b128)
+
+# User Interface
+* The website’s structure and styling achieved using HTML and CSS, ensuring a clean, accessible, and aesthetically pleasing design. Bootstrap was integrated to guarantee a responsive design and a consistent look across various devices, thus enhancing the overall user experience. 
+* JavaScript was employed to introduce interactive elements, making the interface more
+dynamic and engaging.
+* The backend of the website is powered by Flask.
+* To provide faster responses, we also offer a caching service for previously checked
+images.
+
+
 
 #  Conclusion
 In this project, we successfully developed a robust AI system that distinguishes between real and AI-generated images using Capsule Networks. Our model demonstrated impressive performance across diverse datasets, achieving consistent accuracy in detecting AI-generated content from various generative models, including GANs and Diffusion models.
