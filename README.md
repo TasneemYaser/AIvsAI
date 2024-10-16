@@ -55,5 +55,61 @@ By incorporating this wide spectrum of generative models and image categories, t
 
 ![2](https://github.com/user-attachments/assets/a63e64ad-29f1-4084-99c5-fcc292eeb396)
 
+## 2. Proposed Model
+We chose a Capsule Network architecture for our project to effectively detect AI-generated images. This architecture was proposed by Hinton et al. in 2011, addressing limitations found in traditional Convolutional Neural Networks (CNNs), particularly their effectiveness in capturing hierarchical relationships in images.
+
+Key Features of Capsule Networks:
+* Hierarchical Relationships: Capsule Networks maintain spatial relationships between low- and high-level features, preserving more information compared to CNNs while using fewer data.
+* Dynamic Routing: This mechanism calculates agreement between features extracted by primary capsules, allowing for more precise classification.
+
+### Architecture Overview:
+1. Image Pre-processing: Each input image is divided into patches. We use a standard size of 300×300 pixels for optimal processing.
+2. Feature Extraction: The pre-processed image first passes through a portion of the VGG-19 network, pre-trained on the ImageNet dataset. This serves as a feature extractor, helping to reduce overfitting through transfer learning.
+3. Capsule Network: The model consists of 10 primary capsules and two output capsules (one for “real” and one for “fake”).
+Each primary capsule contains:
+* A 2D convolutional layer
+* A statistical pooling layer that ensures independence from input image size
+* A 1D convolutional layer
+4. Output Calculation: The activations of the output capsules determine the final classification probabilities. The dynamic routing algorithm is employed to route features to the appropriate output capsules based on real-time agreement.
+5. Regularization: We introduce random noise and dropout during training to enhance robustness. A squash function normalizes the output vectors, stabilizing the training process.
+
+### Training Details:
+* Model Parameters: 10 primary capsules, Dropout with a rate of 0.3 and 2 iterations were used in the dynamic routing algorithm to enhance the
+model's robustness and accuracy
+* The model is trained using the sparse categorical cross-entropy loss function because the classification task's labels are provided as binary with sigmoid activation function.
+* The optimizer selected was Adam: We chose this optimizer because it is known for adapting the learning rate during training and effectively handling sparse gradients.
+* Hyperparameters :
+  * The training process utilized a learning rate of 1e-4 ensuring optimal convergence and performance.We employed a learning rate decay schedule to reduce the learning rate over time, preventing overshooting the optimal solution.
+  * We experimented with various hyperparameters and finalized the following settings:
+     - Batch Size: 32 and 128
+       combining the benifits of small and large batch sizes allows for a balanced trade-off between fast, frequent updates(batch size 32) and stable, accurate updates(batch size 128) and balanced between explore & exploit
+     - Number of Epochs: 17 epochs.
+   
+### Challenges we faced and Solutions
+* Data Imbalance:  Our dataset had an uneven distribution of classes, leading to a biased model that favored the majority class [Fake], this issues solved by provide Undersampling techniques to reduce instances of the majority class 
+* Long Training Times: Training the model was taking an excessive amount of time due to the complexity and size of the dataset. the solution was utilizing GPUs for faster computation and parallel processing capabilities. In addition we had experimented with different batch sizes to find an optimal balance between training speed and model performance.
+* Vanishing Gradient: Gradients either became too small during backpropagation, causing the model to train poorly and causing not a number [NAN] loss. we overcame this challenge by using Gradient Clipping, Applied gradient clipping to restrict the gradients to a certain range, preventing them from becoming too large beside the normalization layers and learning rate schedule.
 
 
+# Results and Analysis
+Our approach was rigorously evaluated using a diverse artifact dataset comprising images from 25 different generators, covering a wide range of categories to ensure a robust and representative sample. The total dataset included 1,936,738 samples, with 20% reserved for testing. The model achieved an accuracy of 86% during training and 86.24% during testing over 17 epochs, highlighting its consistency and effectiveness in detecting AI-generated content across various generator types. The training process utilized a learning rate of 1e-4 with the Adam optimizer, ensuring optimal convergence and performance. Our model architecture incorporated 10 primary capsules and employed dropout with a rate of 0.3. Additionally, 2 iterations were utilized in the dynamic routing algorithm to enhance the model's robustness and accuracy.
+* Confusion Matrix:
+
+**************
+
+* Classification Report
+
+***********
+
+To gain further insights into the model's performance, we applied the same architecture to different datasets, each featuring its own variety of generators and categories. We used a subset of the artifact dataset, utilizing 15,000 samples from the cycle generator, achieving an accuracy of 99.88% on the training set and 88.39% on the test set. We also included real images from the COCO dataset and generated images using the Taming Transformer, yielding performance metrics of 93.37% for training and 91.85% for testing. Upon combining these datasets, our model achieved an overall accuracy of 88%, indicating its adaptability across different datasets and types of generated images.
+
+For the CIFake dataset, which included real images collected from the CIFAR-10 dataset and fake images generated from the equivalent of CIFAR-10 using Stable Diffusion version 1.4, we used 100,000 images for training (50k real and 50k fake) and 20,000 for testing (10k real and 10k fake). Our approach achieved an accuracy of 97.2% on the training set and 96% on the test set.
+
+We also evaluated our model using the Faces dataset, which comprises 130,000 real faces from the Flickr dataset collected by Nvidia, alongside 130,000 fake faces generated by StyleGAN and Stable Diffusion. The model achieved an impressive accuracy of 95% on the training set and 93.5% on the test set. These results highlight the model's robustness and effectiveness in distinguishing between real and AI-generated content.
+
+The following table summarizes the performance of our model on various datasets:
+*******
+
+The following table compares the performance of our model with other models across different datasets. In the Artifact dataset, a CNN model achieved an accuracy of 87%. Our approach, evaluated on the Artifact dataset, utilized a Capsule model and achieved an accuracy of 86.24%. Transitioning to the Faces dataset, a Capsule model achieved a higher accuracy of 92%. On the Faces dataset, our Capsule model demonstrated improved performance with an accuracy of 93.5%. These results illustrate the comparative effectiveness of different models in detecting AI-generated content across specific datasets, highlighting the strengths of Capsule models, particularly in the context of face image detection.
+
+********
