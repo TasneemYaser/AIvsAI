@@ -51,4 +51,9 @@ In total, the dataset consists of 2,496,738 images, including 964,989 real image
 
 By incorporating this wide spectrum of generative models and image categories, the dataset ensures the detection system is capable of handling both seen and unseen synthetic image generators. This broad variety allows the model to better generalize across different types of manipulated content.
 
+![1](https://github.com/user-attachments/assets/15e9685a-238b-4016-b0e8-4daf095b1f89)
+
+![2](https://github.com/user-attachments/assets/a63e64ad-29f1-4084-99c5-fcc292eeb396)
+
+
 
