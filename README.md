@@ -1,6 +1,10 @@
 # AI-Vs-AI
 ![8](https://github.com/user-attachments/assets/66f3bfae-85b1-4081-8f98-0cbeb052fcb1)
 
+# Project Demo
+
+https://github.com/user-attachments/assets/0df36c04-bc6e-4cf5-9baf-e1a6fff45295
+
 
 # Project Idea
 In recent years, AI-generated content has proliferated, raising significant concerns about the authenticity of online visual media. Models like Generative Adversarial Networks (GANs) and Diffusion models can generate highly realistic images that are often indistinguishable from real ones. This evolution introduces a critical challenge: **Can AI overcome itself?**
@@ -126,8 +130,6 @@ dynamic and engaging.
 * The backend of the website is powered by Flask.
 * To provide faster responses, we also offer a caching service for previously checked
 images.
-
-https://github.com/user-attachments/assets/0df36c04-bc6e-4cf5-9baf-e1a6fff45295
 
 
 #  Conclusion
